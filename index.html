@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>TIC-TAC-TOE</title>
+	<link rel="stylesheet" href="a.css">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+	<script src="a.js"></script>
+</head>
+<body>
+	<div class="container">
+		<div class="heading">
+			<h1>TIC-TAC-TOE</h1>
+		</div>
+		<div class="tab1">
+			<table>
+				<tr>
+					<td id="c00" class="box" onclick="func(this.id)"></td>
+					<td id="c01" class="box" onclick="func(this.id)"></td>
+					<td id="c02" class="box" onclick="func(this.id)"></td>
+				</tr>
+				<tr>
+					<td id="c10" class="box" onclick="func(this.id)"></td>
+					<td id="c11" class="box" onclick="func(this.id)"></td>
+					<td id="c12" class="box" onclick="func(this.id)"></td>
+				</tr>
+				<tr>
+					<td id="c20" class="box" onclick="func(this.id)"></td>
+					<td id="c21" class="box" onclick="func(this.id)"></td>
+					<td id="c22" class="box" onclick="func(this.id)"></td>
+				</tr>
+			</table>
+		</div>
+
+		<div class="score">
+			<span class="fa fa-trophy"></span>
+			SCOREBOARD
+			<span class="fa fa-trophy"></span>
+		</div>
+
+		<div class="tab2">
+			<table>
+				<tr>
+					<th class="styl">PLAYER 1 (X)</th>
+					<th>PLAYER 2 (O)</th>
+				</tr>
+				<tr>
+					<td id="p1score">0</td>
+					<td id="p2score">0</td>
+				</tr>
+			</table>
+		</div>
+
+		<div class="btn">
+			<button onclick="fullrst()">RESET</button>	
+		</div>
+	</div>
+
+</body>
+</html>
