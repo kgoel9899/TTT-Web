@@ -64,6 +64,13 @@ function check(p) {
 			break;
 		}
 	}
+	if(flag === 1) {
+		if(p === 'X') {
+			return 0;
+		} else {
+			return 1;
+		}
+	}
 	for(var i=0;i<3;i++) {
 		if(board[0][i] === board[1][i] && board[1][i] === board[2][i] && board[2][i] === p) {
 			var id1 = "c" + 0 + i, id2 = "c" + 1 + i, id3 = "c" + 2 + i;
@@ -74,12 +81,26 @@ function check(p) {
 			break;
 		}
 	}
+	if(flag === 1) {
+		if(p === 'X') {
+			return 0;
+		} else {
+			return 1;
+		}
+	}
 	if(board[0][0] === board[1][1] && board[1][1] === board[2][2] && board[2][2] === p) {
 		var id1 = "c" + 0 + 0, id2 = "c" + 1 + 1, id3 = "c" + 2 + 2;
 		document.getElementById(id1).setAttribute("class", "styl");
 		document.getElementById(id2).setAttribute("class", "styl");
 		document.getElementById(id3).setAttribute("class", "styl");
 		flag = 1;
+	}
+	if(flag === 1) {
+		if(p === 'X') {
+			return 0;
+		} else {
+			return 1;
+		}
 	}
 	if(board[0][2] === board[1][1] && board[1][1] === board[2][0] && board[2][0] === p) {
 		var id1 = "c" + 0 + 2, id2 = "c" + 1 + 1, id3 = "c" + 2 + 0;
