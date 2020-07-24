@@ -21,7 +21,7 @@ function func(idd) {
 			if(ans === 0) {
 				wins = 0;
 				setTimeout(function() {
-				  	alert("Congratulations, Player 1 won.");
+				  	alert("Congratulations, Player won.");
 				}, 10);
 				setTimeout(updsc, 100);
 			} else if(d == 1) {
@@ -246,10 +246,12 @@ function change() {
 	if(comp.innerText == "MULTIPLAYER?") {
 		comp.innerText = "PLAY WITH COMPUTER?";
 		heads[1].innerText = "PLAYER 2 (O)";
+		heads[0].innerText = "PLAYER 1 (X)";
 		cmp = 0;
 	} else {
 		comp.innerText = "MULTIPLAYER?";
 		heads[1].innerText = "COMPUTER (O)";
+		heads[0].innerText = "PLAYER (X)";
 		cmp = 1;
 		heads[0].classList.add("styl");
 		heads[1].classList.remove("styl");
