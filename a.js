@@ -25,11 +25,13 @@ function func(idd) {
 				  	alert("Congratulations, Player won.");
 				}, 10);
 				setTimeout(updsc, 100);
+				setTimeout(reset, 100);
 			} else if(d == 1) {
 				setTimeout(function() {
 				  	alert("Oops, It's a Draw.");
 				}, 10);
 				setTimeout(updsc, 100);
+				setTimeout(reset, 100);
 			} else {
 				computerChance();
 				ans = check('O');
@@ -40,11 +42,13 @@ function func(idd) {
 					  	alert("Oops, Computer won.");
 					}, 10);
 					setTimeout(updsc, 100);
+					setTimeout(reset, 100);
 				} else if(d === 1) {
 					setTimeout(function() {
 					  	alert("Oops, It's a Draw.");
 					}, 10);
 					setTimeout(updsc, 100);
+					setTimeout(reset, 100);
 				}
 			}
 		} else {
@@ -72,7 +76,7 @@ function func(idd) {
 				  	alert("Congratulations, Player 1 won.");
 				}, 10);
 				setTimeout(updsc, 100);
-				// setTimeout(reset, 100);
+				setTimeout(reset, 100);
 			} else if(ans === 1) { //player 2 wins
 				heads[0].classList.remove("styl");
 				heads[1].classList.remove("styl");
@@ -82,7 +86,7 @@ function func(idd) {
 				  	alert("Congratulations, Player 2 won.");
 				}, 10);
 				setTimeout(updsc, 100);
-				// setTimeout(reset, 100);
+				setTimeout(reset, 100);
 			} else if(d === 1) {
 				heads[0].classList.remove("styl");
 				heads[1].classList.remove("styl");
@@ -90,7 +94,7 @@ function func(idd) {
 				  	alert("It's a Draw.");
 				}, 10);
 				setTimeout(updsc, 100);
-				// setTimeout(reset, 100);
+				setTimeout(reset, 100);
 			}
 		}
 	}
