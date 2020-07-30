@@ -2,8 +2,9 @@ var symbols = ['X', 'O'];
 var board = [['.', '.', '.'], ['.', '.', '.'], ['.', '.', '.']];
 var wins = -1;
 var heads = document.getElementsByTagName("th");
-var prevturn = 0;
-var turn = prevturn;
+// var prevturn = 0;
+// var turn = prevturn;
+var turn = 0;
 var cmp = 0;
 function func(idd) {
 	// console.log(idd[1]);
@@ -12,7 +13,7 @@ function func(idd) {
 	if(board[i][j] == '.' && wins == -1) {
 		if(cmp == 1) {
 			turn = 0;
-			prevturn = 0;
+			// prevturn = 0;
 			console.log(cmp);
 			document.getElementById(idd).innerText = symbols[turn];
 			board[i][j] = symbols[turn];
@@ -215,11 +216,13 @@ function reset() {
 		}
 	}
 	wins = -1;
-	prevturn ^= 1;
-	turn = prevturn;
+	// prevturn ^= 1;
+	// turn = prevturn;
+	turn = 0;
 	if(cmp == 1) {
-		prevturn = 0;
-		turn = prevturn;
+		// prevturn = 0;
+		// turn = prevturn;
+		turn = 0;
 	}
 	if(turn == 0) {
 		heads[0].classList.add("styl");
@@ -279,7 +282,8 @@ function fullrst() {
 	var psc2 = document.getElementById("p2score");
 	psc1.innerText = 0;
 	psc2.innerText = 0;
-	prevturn = 0;
-	turn = prevturn;
+	// prevturn = 0;
+	// turn = prevturn;
+	turn = 0;
 	heads[0].classList.add("styl");
 }
