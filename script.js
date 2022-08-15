@@ -17,22 +17,22 @@ function place_sym(id) {
 		if(comp_enabled == 1) {
 			document.getElementById(id).innerText = symbols[turn];
 			board[i][j] = symbols[turn];
-			var ans = check_game(symbols[turn]);
+			var ans = check_game();
 			var d = draw();
-			if(ans === 0) {
+			if(ans[0] === 'X') {
 				wins = 0;
 				result.innerText = "Player Won!"
-				update_score();
+				update_score(ans[1], ans[2], ans[3]);
 			} else if(d == 1) {
 				result.innerText = "It's a draw!"
 			} else {
-				computerChance();
-				ans = check_game('O');
+				computer_chance();
+				ans = check_game();
 				d = draw();
-				if(ans === 1) {
+				if(ans[0] === 'O') {
 					wins = 1;
 					result.innerText = "Computer Won!"
-					update_score();
+					update_score(ans[1], ans[2], ans[3]);
 				} else if(d === 1) {
 					result.innerText = "It's a draw!"
 				}
@@ -40,16 +40,16 @@ function place_sym(id) {
 		} else {
 			document.getElementById(id).innerText = symbols[turn];
 			board[i][j] = symbols[turn];
-			var ans = check_game(symbols[turn]);
+			var ans = check_game();
 			var d = draw();
-			if(ans === 0) {
+			if(ans[0] === 'X') {
 				wins = 0;
 				result.innerText = "Player 1 Won!"
-				update_score();
-			} else if(ans === 1) {
+				update_score(ans[1], ans[2], ans[3]);
+			} else if(ans[0] === 'O') {
 				wins = 1;
 				result.innerText = "Player 2 Won!"
-				update_score();
+				update_score(ans[1], ans[2], ans[3]);
 			} else if(d === 1) {
 				result.innerText = "It's a draw!"
 			} else {
@@ -72,70 +72,102 @@ function draw_winning_line(id1, id2, id3) {
 	document.getElementById(id3).classList.add("won");
 }
 
-function who_won(sym) {
-	if(sym === 'X') return 0; // player 1 won
-	else return 1; // player 2 won
-}
-
-function check_game(sym) {
-	var flag = 0;
+function check_game() {
 	for(var i=0;i<3;i++) {
-		if(board[i][0] === board[i][1] && board[i][1] === board[i][2] && board[i][2] === sym) {
+		if(board[i][0] === board[i][1] && board[i][1] === board[i][2]) {
 			var id1 = "c" + i + 0, id2 = "c" + i + 1, id3 = "c" + i + 2;
-			draw_winning_line(id1, id2, id3);
-			flag = 1;
-			break;
+			return [board[i][0], id1, id2, id3];
 		}
 	}
-	if(flag === 1) return who_won(sym);
 
 	for(var i=0;i<3;i++) {
-		if(board[0][i] === board[1][i] && board[1][i] === board[2][i] && board[2][i] === sym) {
+		if(board[0][i] === board[1][i] && board[1][i] === board[2][i]) {
 			var id1 = "c" + 0 + i, id2 = "c" + 1 + i, id3 = "c" + 2 + i;
-			draw_winning_line(id1, id2, id3);
-			flag = 1;
-			break;
+			return [board[0][i], id1, id2, id3];
 		}
 	}
-	if(flag === 1) return who_won(sym);
 
-	if(board[0][0] === board[1][1] && board[1][1] === board[2][2] && board[2][2] === sym) {
+	if(board[0][0] === board[1][1] && board[1][1] === board[2][2]) {
 		var id1 = "c" + 0 + 0, id2 = "c" + 1 + 1, id3 = "c" + 2 + 2;
-		draw_winning_line(id1, id2, id3);
-		flag = 1;
+		return [board[0][0], id1, id2, id3];
 	}
-	if(flag === 1) return who_won(sym);
 
-	if(board[0][2] === board[1][1] && board[1][1] === board[2][0] && board[2][0] === sym) {
+	if(board[0][2] === board[1][1] && board[1][1] === board[2][0]) {
 		var id1 = "c" + 0 + 2, id2 = "c" + 1 + 1, id3 = "c" + 2 + 0;
-		draw_winning_line(id1, id2, id3);
-		flag = 1;
+		return [board[0][2], id1, id2, id3];
 	}
-	if(flag === 1) return who_won(sym);
-
-	return -1; // nobody won
+	return ['', "", "", ""]; // nobody won
 }
 
-function computerChance() {
-	for(var i=0;i<3;i++) {
-		for(var j=0;j<3;j++) {
-			if(board[i][j] === '.') {
-				board[i][j] = 'O';
-				var id1 = "c" + i + j;
-				document.getElementById(id1).innerText = 'O';
-				return;
-			}
-		}
-	}
+function minimax(human_chance, depth) {
+	var won = check_game();
+	var ans = 0;
+	if(won[0] === 'X') ans = 20;
+	else if(won[0] === 'O') ans = -20;
+
+    if(ans === 20) return ans - depth;
+    else if(ans === -20) return ans + depth;
+    else if(draw() === 1) return 0;
+
+    if(human_chance) {
+        var best = -1e8;
+        for(var i=0;i<3;i++) {
+            for(var j=0;j<3;j++) {
+                if(board[i][j] === '.') {
+                    board[i][j] = 'X';
+                    best = Math.max(best, minimax(!human_chance, depth + 1));
+                    board[i][j] = '.';
+                }
+            }
+        }
+        return best;
+    } else {
+        var best = 1e8;
+        for(var i=0;i<3;i++) {
+            for(var j=0;j<3;j++) {
+                if(board[i][j] === '.') {
+                    board[i][j] = 'O';
+                    best = Math.min(best, minimax(!human_chance, depth + 1));
+                    board[i][j] = '.';
+                }
+            }
+        }
+        return best;
+    }
 }
 
-function update_score() {
+function computer_chance() {
+	var best = 1e8;
+	var x = -1, y = -1;
+    for(var i=0;i<3;i++) {
+        for(var j=0;j<3;j++) {
+            if(board[i][j] === '.') {
+                board[i][j] = 'O';
+                // console.log(JSON.stringify(board));
+                var temp = minimax(true, 0);
+                board[i][j] = '.';
+                // console.log(JSON.stringify(board));
+                if(temp < best) {
+                    best = temp;
+                    x = i;
+                    y = j;
+                }
+            }
+        }
+    }
+    board[x][y] = 'O';
+    var id = "c" + x + y;
+	document.getElementById(id).innerText = 'O';
+}
+
+function update_score(id1, id2, id3) {
 	var psc1, psc2, pi1, pi2;
 	if(wins == 0) {
 		p1sc.innerText = (p1sc.innerText - '0') + 1;
 	} else if(wins == 1) {
 		p2sc.innerText = (p2sc.innerText - '0') + 1;
 	}
+	draw_winning_line(id1, id2, id3);
 }
 
 function reset() {
@@ -158,7 +190,7 @@ function reset() {
 function draw() {
 	for(var i=0;i<3;i++) {
 		for(var j=0;j<3;j++) {
-			if(board[i][j] == '.') {
+			if(board[i][j] === '.') {
 				return 0;
 			}
 		}
