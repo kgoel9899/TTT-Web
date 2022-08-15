@@ -7,7 +7,6 @@
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 	<link rel="stylesheet" href="styles.css">
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-	<script src="script.js"></script>
 </head>
 <body>
 	<div class="container">
@@ -16,26 +15,26 @@
 				<div class="heading">
 					<h1>TIC-TAC-TOE</h1>
 				</div>
-				<div class="tab1">
-					<div id="c00" class="box" onclick="func(this.id)"></div>
-					<div id="c01" class="box" onclick="func(this.id)"></div>
-					<div id="c02" class="box" onclick="func(this.id)"></div>
-					<div id="c10" class="box" onclick="func(this.id)"></div>
-					<div id="c11" class="box" onclick="func(this.id)"></div>
-					<div id="c12" class="box" onclick="func(this.id)"></div>
-					<div id="c20" class="box" onclick="func(this.id)"></div>
-					<div id="c21" class="box" onclick="func(this.id)"></div>
-					<div id="c22" class="box" onclick="func(this.id)"></div>
+				<div class="board">
+					<div id="c00" class="box" onclick="place_sym(this.id)"></div>
+					<div id="c01" class="box" onclick="place_sym(this.id)"></div>
+					<div id="c02" class="box" onclick="place_sym(this.id)"></div>
+					<div id="c10" class="box" onclick="place_sym(this.id)"></div>
+					<div id="c11" class="box" onclick="place_sym(this.id)"></div>
+					<div id="c12" class="box" onclick="place_sym(this.id)"></div>
+					<div id="c20" class="box" onclick="place_sym(this.id)"></div>
+					<div id="c21" class="box" onclick="place_sym(this.id)"></div>
+					<div id="c22" class="box" onclick="place_sym(this.id)"></div>
 				</div>
 				<div class="score">
 					<span class="fa fa-trophy"></span>
 					SCOREBOARD
 					<span class="fa fa-trophy"></span>
 				</div>
-				<div class="tab2">
+				<div class="score-table">
 					<table>
 						<tr>
-							<th class="styl">PLAYER 1 (X)</th>
+							<th class="chance">PLAYER 1 (X)</th>
 							<th>PLAYER 2 (O)</th>
 						</tr>
 						<tr>
@@ -44,15 +43,16 @@
 						</tr>
 					</table>
 				</div>
-				<div class="butto">
-					<button onclick="fullrst()">FULL RESET</button>
-					<!-- <button onclick="reset()">RESET BOARD</button> -->
-					<!-- <button onclick="fullrst()">FULL RESET</button> -->
-					<button id="namech" onclick="change()">PLAY WITH COMPUTER?</button>
+				<div class="buttons">
+					<button onclick="reset()">RESET BOARD</button>
+					<button onclick="full_reset()">FULL RESET</button>
+					<button id="mode" onclick="mode_change()">PLAY WITH COMPUTER?</button>
 				</div>
+				<h2 id="winner"></h2>
 			</div>
 		</div>
 	</div>
+	<script src="script.js"></script>
 
 </body>
 </html>
